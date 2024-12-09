@@ -1,5 +1,6 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, CallbackContext, MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, CallbackContext, MessageHandler
+from telegram.ext.filters import Filters
 
 # Вставьте сюда токен вашего бота
 TOKEN = '7942164878:AAEvsE6uQsClEZhI12ikeUZ4sOxcyiecEPg'
@@ -24,7 +25,7 @@ questions = {
     "0.1": ["Вы молились о том, чтобы Бог вселил в вас и в участников этой группы великий страх перед грехом прелюбодеяния?", "Вы постились по этой теме?"],
     "1": ["Вы стремились исполниться Духом Святым сегодня?", "Исполняли ли вы 3 закона духовной жизни?"],
     "1.1": ["Вы каялись сегодня за свои грехи?", "Какие грехи исповедовали пред Богом и людьми?"],
-    "1.2": ["Были ли вы послушны Иисусу сегодня?", "Что вы сделали, чтобы подчиниться воле Иисуса сегодня?"],
+    "1.2": ["Были ли вы послушны Иисусу сегодня?", "Что в�� сделали, чтобы подчиниться воле Иисуса сегодня?"],
     "1.3": ["Вы верите Иисусу во всем?", "Вы доверяли Богу сегодня в своих делах и мыслях?"],
     "4": ["Вы молились сегодня?", "Как долго вы пребывали в молитве?"],
     "5": ["Вы изучали Слово сегодня?", "Какую часть Писания вы прочитали сегодня?"],
@@ -55,7 +56,7 @@ def start(update: Update, context: CallbackContext) -> None:
     
     # Отправляем меню
     reply_markup = build_menu()
-    message = context.bot.send_message(chat_id=chat_id, text="Начните проверку, Выберите пункт из меню ниже:", reply_markup=reply_markup)
+    message = context.bot.send_message(chat_id=chat_id, text="Начните проверку, выберите пункт из меню ниже:", reply_markup=reply_markup)
     user_last_message[chat_id] = message.message_id  # Сохраняем ID сообщения
 
 # Функция для создания клавиатуры меню
@@ -79,7 +80,7 @@ def button_handler(update: Update, context: CallbackContext) -> None:
     # Создаем текст с вопросами по выбранному пункту
     if selected_item in questions:
         question_list = questions[selected_item]
-        message_text = f"<b>{item_title}</b>\n\nЗадайте себе эти вопросы, и перейдите к следующим пунктам.:"
+        message_text = f"<b>{item_title}</b>\n\nЗадайте себе эти вопросы, и перейдите к следующим пу��ктам.:"
         for i, question in enumerate(question_list, start=1):
             message_text += f"\n{i}. <i>{question}</i>"
     else:
